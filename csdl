@@ -1,0 +1,121 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS travel_tour;
+USE travel_tour;
+
+-- Users table
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    full_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    address TEXT,
+    role ENUM('admin', 'user') DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Categories table
+CREATE TABLE categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    status TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Destinations table
+CREATE TABLE destinations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    address TEXT,
+    province VARCHAR(100),
+    country VARCHAR(100),
+    status TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Tours table
+CREATE TABLE tours (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    duration VARCHAR(50),
+    price DECIMAL(10,2) NOT NULL,
+    discount_price DECIMAL(10,2),
+    image VARCHAR(255),
+    departure_date DATE,
+    max_participants INT,
+    current_participants INT DEFAULT 0,
+    status ENUM('draft', 'published', 'cancelled') DEFAULT 'draft',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+-- Tour destinations (many-to-many relationship)
+CREATE TABLE tour_destinations (
+    tour_id INT,
+    destination_id INT,
+    order_number INT,
+    duration VARCHAR(50),
+    PRIMARY KEY (tour_id, destination_id),
+    FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE CASCADE,
+    FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE
+);
+
+-- Bookings table
+CREATE TABLE bookings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    tour_id INT,
+    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    number_of_people INT NOT NULL,
+    total_price DECIMAL(10,2) NOT NULL,
+    status ENUM('pending', 'confirmed', 'cancelled', 'completed') DEFAULT 'pending',
+    payment_status ENUM('unpaid', 'paid', 'refunded') DEFAULT 'unpaid',
+    special_requests TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE SET NULL
+);
+
+-- Reviews table
+CREATE TABLE reviews (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    tour_id INT,
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE CASCADE
+);
+
+-- Gallery table
+CREATE TABLE gallery (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tour_id INT,
+    image_path VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (tour_id) REFERENCES tours(id) ON DELETE CASCADE
+);
+
+-- Insert admin sample
+INSERT INTO users (username, password, email, full_name, role)
+VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@example.com', 'Administrator', 'admin');
+
+-- Insert sample categories
+INSERT INTO categories (name, description) VALUES
+('Tour trong nước', 'Các tour du lịch trong nước'),
+('Tour nước ngoài', 'Các tour du lịch nước ngoài'),
+('Tour nghỉ dưỡng', 'Các tour nghỉ dưỡng cao cấp'),
+('Tour văn hóa', 'Khám phá văn hóa địa phương');
