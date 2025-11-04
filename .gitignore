@@ -1,0 +1,26 @@
+# PHP / project ignores
+/vendor/
+/node_modules/
+.env
+env.php
+.env.php
+storage/*.log
+storage/*.cache
+/storage/
+assets/uploads/
+uploads/
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+composer.lock
+
+# OS
+desktop.ini
+
+# PHPStorm
+/.idea
+
+# Mac
+.DS_Store

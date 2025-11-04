@@ -1,0 +1,15 @@
+# Enable rewrite engine to route all requests to index.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /duan_1/
+
+    # If the request is for a real file or directory, serve it directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Otherwise route everything to index.php, preserving the path
+    RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+# Fallback for servers without mod_rewrite: nothing to do
