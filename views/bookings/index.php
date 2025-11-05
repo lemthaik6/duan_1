@@ -16,7 +16,6 @@
                 </div>
             <?php else : ?>
                 <?php
-                    // Count unpaid bookings and total unpaid amount
                     $unpaidCount = 0;
                     $unpaidTotal = 0;
                     foreach ($bookings as $b) {

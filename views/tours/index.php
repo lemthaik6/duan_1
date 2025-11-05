@@ -2,7 +2,7 @@
 
 <div class="col-12">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Tất cả Tours</h2>
+        <h2 class="mb-0" style="text-align: center;align-items: center;">Tất cả Tours</h2>
         <div class="text-muted small">Tìm thấy <?= count($tours ?? []) ?> tour</div>
     </div>
 
@@ -14,7 +14,6 @@
                         $imgUrl = BASE_URL . 'assets/images/tour-default.svg';
                         if (!empty($tour['image'])) {
                             $thumbPath = PATH_ASSETS_UPLOADS . $tour['image'];
-                            // try thumb
                             $parts = explode('/', $tour['image']);
                             $filename = array_pop($parts);
                             $folder = implode('/', $parts);

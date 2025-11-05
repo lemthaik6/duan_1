@@ -50,6 +50,6 @@
             <input type="file" name="image" accept="image/*" class="form-control" />
         </div>
         <button class="btn btn-primary"><?= $isEdit ? 'Cập nhật' : 'Tạo' ?></button>
-        <a class="btn btn-secondary" href="<?= BASE_URL ?>admin/tours">Hủy</a>
+        <a class="btn btn-secondary" href="<?= BASE_URL ?>admin/tours">hủy</a>
     </form>
 </div>

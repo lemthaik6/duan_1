@@ -2,7 +2,6 @@
 $title = 'Trang chủ - Travel Tour';
 ?>
 
-<!-- Hero Section (use featured tours images if available) -->
 <section class="hero-section position-relative">
     <div class="swiper hero-slider">
         <div class="swiper-wrapper">
@@ -34,8 +33,6 @@ $title = 'Trang chủ - Travel Tour';
         <div class="swiper-button-prev"></div>
     </div>
 </section>
-
-<!-- Search Section -->
 <section class="search-section py-5 bg-light">
     <div class="container">
         <form action="<?= BASE_URL ?>search" method="GET" class="row g-3">
@@ -70,7 +67,6 @@ $title = 'Trang chủ - Travel Tour';
     </div>
 </section>
 
-<!-- Featured Tours Section -->
 <section class="featured-tours py-5">
     <div class="container">
         <h2 class="text-center mb-5">Tour nổi bật</h2>
@@ -135,7 +131,6 @@ $title = 'Trang chủ - Travel Tour';
     </div>
 </section>
 
-<!-- Why Choose Us Section -->
 <section class="why-us py-5 bg-light">
     <div class="container">
         <h2 class="text-center mb-5">Tại sao chọn Travel Tour?</h2>
@@ -167,8 +162,6 @@ $title = 'Trang chủ - Travel Tour';
         </div>
     </div>
 </section>
-
-<!-- Testimonials Section -->
 <section class="testimonials py-5">
     <div class="container">
         <h2 class="text-center mb-5">Khách hàng nói gì về chúng tôi?</h2>
@@ -195,31 +188,8 @@ $title = 'Trang chủ - Travel Tour';
                         </div>
                     </div>
                 </div>
-                <!-- Thêm các slide đánh giá khác -->
             </div>
             <div class="swiper-pagination"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Newsletter Section -->
-<section class="newsletter py-5 bg-primary text-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 mb-3 mb-md-0">
-                <h3>Đăng ký nhận thông tin ưu đãi</h3>
-                <p class="mb-0">Nhận ngay voucher giảm giá 10% cho chuyến đi đầu tiên</p>
-            </div>
-            <div class="col-md-6">
-                <form class="row g-3">
-                    <div class="col-8">
-                        <input type="email" class="form-control" placeholder="Email của bạn">
-                    </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-light w-100">Đăng ký</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </section>

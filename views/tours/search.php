@@ -1,9 +1,9 @@
 <?php $title = 'Kết quả tìm kiếm'; ?>
 
 <div class="col-12">
-    <h2 class="mb-4">Kết quả tìm kiếm</h2>
+    <h2 class="mb-4" style="text-align: center; ">Kết quả tìm kiếm</h2>
     <?php if (empty($results)) : ?>
-        <div class="alert alert-warning">Không tìm thấy tour phù hợp.</div>
+        <div class="alert alert-warning" style="text-align: center;">Không tìm thấy tour phù hợp.</div>
     <?php else : ?>
         <div class="row">
             <?php foreach ($results as $tour) : ?>

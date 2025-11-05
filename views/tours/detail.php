@@ -46,7 +46,6 @@
                     </div>
                 <?php endif; ?>
 
-                <!-- Review form -->
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <div class="mt-4">
                         <h5>Gửi đánh giá</h5>
@@ -91,7 +90,7 @@
                         <input type="number" name="number_of_people" class="form-control" value="1" min="1">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Ghi chú</label>
+                        <label class="form-label">ghi chú</label>
                         <textarea name="special_requests" class="form-control" rows="3"></textarea>
                     </div>
                     <div class="d-grid">
