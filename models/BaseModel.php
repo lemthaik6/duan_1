@@ -109,7 +109,6 @@ class BaseModel
         return $stmt->fetchAll();
     }
 
-    // Đếm số bản ghi
     public function count($conditions = [])
     {
         $sql = "SELECT COUNT(*) as total FROM {$this->table}";
@@ -126,7 +125,6 @@ class BaseModel
         return $stmt->fetch()['total'];
     }
 
-    // Kiểm tra xem bảng có cột cụ thể hay không
     public function hasColumn($columnName)
     {
         try {

@@ -59,7 +59,6 @@ class BookingModel extends BaseModel
      */
     public function getMonthlyBookings($months = 6)
     {
-        // Build labels for the last $months months
         $labels = [];
         for ($i = $months - 1; $i >= 0; $i--) {
             $labels[] = date('Y-m', strtotime("-{$i} months"));
@@ -109,7 +108,7 @@ class BookingModel extends BaseModel
     }
 
     /**
-     * Get all bookings with joined user and tour info for admin listing
+     * Get all bookings with tour and user details
      * @return array
      */
     public function getAllWithDetails()
@@ -125,10 +124,6 @@ class BookingModel extends BaseModel
         return $stmt->fetchAll();
     }
 
-    /**
-     * Mark all unpaid bookings for a given user as paid (mock payment)
-     * Returns number of rows updated
-     */
     public function markUserBookingsAsPaid($userId)
     {
         $sql = "UPDATE {$this->table} SET payment_status = 'paid', status = 'confirmed', payment_reference = :ref WHERE user_id = :uid AND payment_status != 'paid'";
@@ -138,9 +133,6 @@ class BookingModel extends BaseModel
         return $stmt->rowCount();
     }
 
-    /**
-     * Count unpaid bookings for a user excluding cancelled ones
-     */
     public function countUnpaidActiveByUser($userId)
     {
         $sql = "SELECT COUNT(*) as total FROM {$this->table} WHERE user_id = :uid AND payment_status = 'unpaid' AND (status IS NULL OR status != 'cancelled')";
@@ -150,19 +142,12 @@ class BookingModel extends BaseModel
         return (int)($row['total'] ?? 0);
     }
 
-    /**
-     * Mark a booking as cancelled (soft cancel)
-     */
     public function markAsCancelled($id)
     {
         $sql = "UPDATE {$this->table} SET status = 'cancelled' WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
     }
-
-    /**
-     * Simple wrapper to update booking data
-     */
     public function updateBooking($id, $data)
     {
         return $this->update($id, $data);

@@ -15,10 +15,7 @@ if (empty($action)) {
         $action = $requestPath;
     }
 
-    // Remove any leading/trailing slashes
     $action = trim($action, '/');
-
-    // If the path is empty, treat as home
     if ($action === '') {
         $action = '/';
     }
@@ -162,10 +159,7 @@ if ($action === 'contact') {
     require_once PATH_VIEW_MAIN;
     exit;
 }
-
-// Admin routes for tours (keep this as a compact preg_match for admin/tours.*)
 if (preg_match('#^admin/tours(/.*)?$#', $action)) {
-    // list
     if ($action === 'admin/tours') {
         (new AdminController())->toursIndex();
         exit;
@@ -195,8 +189,6 @@ if (preg_match('#^admin/tours(/.*)?$#', $action)) {
         exit;
     }
 }
-
-// Admin routes for other management pages (categories, bookings, reviews, users)
 if ($action === 'admin/categories') {
     (new AdminCategoryController())->index();
     exit;

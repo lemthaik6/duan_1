@@ -22,7 +22,6 @@ class UserModel extends BaseModel
 
     public function createUser($fullName, $email, $password)
     {
-        // create a username from email prefix and ensure uniqueness
         $base = preg_replace('/[^a-z0-9_]/i', '', strstr($email, '@', true));
         $username = $base ?: 'user';
         $suffix = '';
@@ -30,7 +29,7 @@ class UserModel extends BaseModel
         while ($this->findByUsername($username . $suffix)) {
             $i++;
             $suffix = $i;
-            if ($i > 1000) break; // safety
+            if ($i > 1000) break;
         }
         $username = $username . $suffix;
 
@@ -49,7 +48,6 @@ class UserModel extends BaseModel
 
     public function authenticate($identity, $password)
     {
-        // identity can be email or username
         $user = $this->findByEmail($identity);
         if (!$user) {
             $user = $this->findByUsername($identity);

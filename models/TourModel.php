@@ -4,7 +4,6 @@ class TourModel extends BaseModel
 {
     protected $table = 'tours';
 
-    // Lấy danh sách tour với thông tin category
     public function getAllWithCategory($limit = null)
     {
         $sql = "SELECT t.*, c.name as category_name 
@@ -22,7 +21,6 @@ class TourModel extends BaseModel
         return $stmt->fetchAll();
     }
 
-    // Lấy chi tiết tour với thông tin liên quan
     public function getDetail($id)
     {
         $sql = "SELECT t.*, c.name as category_name,
@@ -44,8 +42,6 @@ class TourModel extends BaseModel
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
-
-    // Tìm kiếm tour
     public function search($keyword, $categoryId = null, $minPrice = null, $maxPrice = null)
     {
         $sql = "SELECT t.*, c.name as category_name 
@@ -107,10 +103,6 @@ class TourModel extends BaseModel
         
         return ($tour['current_participants'] + $numberOfPeople) <= $tour['max_participants'];
     }
-
-    /**
-     * Fetch a tour row with a FOR UPDATE lock. Caller must be in a transaction.
-     */
     public function getByIdForUpdate($id)
     {
         $sql = "SELECT * FROM {$this->table} WHERE id = :id FOR UPDATE";
