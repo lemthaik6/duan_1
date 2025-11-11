@@ -65,7 +65,7 @@ $title = 'Trang chủ - Travel Tour';
         </form>
     </div>
 </section>
-<!-- siuuuuuuu -->
+
 <section class="featured-tours py-5">
     <div class="container">
         <h2 class="text-center mb-5">Tour nổi bật</h2>

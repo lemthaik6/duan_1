@@ -29,14 +29,14 @@
                     <tr>
                         <td><?= $b['id'] ?></td>
                         <td>
-                            <?= htmlspecialchars($b['user_name'] ?? $b['user_id']) ?><br/>
-                            <small class="text-muted"><?= htmlspecialchars($b['user_email'] ?? '') ?></small>
+                            <?= htmlspecialchars((string)($b['user_name'] ?? $b['user_id'] ?? '')) ?><br/>
+                            <small class="text-muted"><?= htmlspecialchars((string)($b['user_email'] ?? '')) ?></small>
                         </td>
-                        <td><?= htmlspecialchars($b['tour_title'] ?? $b['tour_id']) ?></td>
-                        <td><?= htmlspecialchars($b['number_of_people']) ?></td>
+                        <td><?= htmlspecialchars((string)($b['tour_title'] ?? $b['tour_id'] ?? '')) ?></td>
+                        <td><?= htmlspecialchars((string)$b['number_of_people']) ?></td>
                         <td><?= number_format($b['total_price'],0,',','.') ?> đ</td>
-                        <td><?= htmlspecialchars($b['payment_status'] ?? '') ?></td>
-                        <td><?= htmlspecialchars($b['status'] ?? '') ?></td>
+                        <td><?= htmlspecialchars((string)($b['payment_status'] ?? '')) ?></td>
+                        <td><?= htmlspecialchars((string)($b['status'] ?? '')) ?></td>
                         <td>
                             <?php if (($b['payment_status'] ?? '') !== 'paid'): ?>
                                 <form method="post" action="<?= BASE_URL ?>admin/bookings/mark-paid" style="display:inline-block">
