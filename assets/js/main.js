@@ -95,8 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // If user is not logged in, prompt and redirect to login
             const loggedIn = bookingForm.dataset.loggedIn === '1';
             if (!loggedIn) {
                 if (confirm('Bạn cần đăng nhập để đặt tour. Chuyển tới trang đăng nhập?')) {
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // UI feedback: spinner + disable button
             const submitBtn = document.getElementById('bookingSubmitBtn');
             const btnText = document.getElementById('bookingBtnText');
             const spinner = document.getElementById('bookingBtnSpinner');
@@ -129,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (spinner) spinner.style.display = 'inline-block';
             if (feedback) { feedback.style.display = 'none'; feedback.innerHTML = ''; }
 
-            // submit via fetch with timeout for better UX
             const formData = new FormData(bookingForm);
             const controller = new AbortController();
             const timeoutMs = 30000; // 30s (increase to accommodate transient DB locks)
