@@ -1,7 +1,6 @@
 <?php
 $title = 'Trang chủ - Travel Tour';
 ?>
-
 <section class="hero-section position-relative">
     <div class="swiper hero-slider">
         <div class="swiper-wrapper">
@@ -91,12 +90,10 @@ $title = 'Trang chủ - Travel Tour';
                                     <?= $tour['title'] ?>
                                 </a>
                             </h5>
-                            
                             <p class="card-text text-muted">
                                 <?= mb_substr($tour['description'], 0, 100) ?>...
                             </p>
                         </div>
-                        
                         <div class="card-footer bg-white">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
